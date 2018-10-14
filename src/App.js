@@ -13,8 +13,9 @@ class App extends React.Component {
     songs.set('baseball', baseball);
     songs.set('boing', boing);
     return (
-      <div className="App">
-        <MusicWidget sourceMap={songs}/>
+
+      <div className="App"  style={{marginTop: "250px"}}>
+        <MusicWidget sourceMap={songs} />
       </div>
     );
   }

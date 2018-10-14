@@ -1,4 +1,5 @@
 import React from 'react';
+import {MdFastForward, MdPlayArrow} from 'react-icons/md'
 import "../styles/MusicWidget.css"
 import AudioTrack from "../model/AudioTrack";
 import TrackItem from "./TrackItem";
@@ -74,15 +75,36 @@ class MusicWidget extends React.Component {
   render() {
     return (
         <div>
-          {this.createPlayButton()}
           <audio ref={this.audioRef} src={this.props.sourceMap.get('arrow')} onEnded={this.ended}/>
+          {this.createPlayButton()}
           {this.renderPlaylist()}
+          <div className="music-widget-container">
+
+            <div>
+              <button className="circular-button fast-forward-button mirror-content" onClick={() => {
+              }}>
+                <MdFastForward className="inner-icon"/>
+              </button>
+            </div>
+
+            <div className="play-button-spacing">
+              <button className="circular-button play-button" onClick={() => {
+              }}>
+                <MdPlayArrow className="inner-icon"/>
+              </button>
+            </div>
+
+            <div>
+              <button className="circular-button fast-forward-button play-button" onClick={() => {
+              }}>
+                <MdFastForward className="inner-icon"/>
+              </button>
+            </div>
+
+          </div>
         </div>
     )
   }
 }
 
 export default MusicWidget;
-
-MusicWidget.propTypes = {
-};
