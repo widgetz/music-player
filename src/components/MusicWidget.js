@@ -19,14 +19,14 @@ class MusicWidget extends React.Component {
               </button>
             </div>
 
-            <div className="play-button-spacing">
+            <div className="play-button-div">
               <button className="circular-button play-button" onClick={()=>{}}>
                 <MdPlayArrow className="inner-icon"/>
               </button>
             </div>
 
             <div>
-              <button className="circular-button fast-forward-button play-button" onClick={()=>{}}>
+              <button className="circular-button fast-forward-button" onClick={()=>{}}>
                 <MdFastForward className="inner-icon"/>
               </button>
             </div>
