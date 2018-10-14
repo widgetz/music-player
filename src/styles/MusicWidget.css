@@ -1,10 +1,61 @@
+.music-widget-container {
+    display: flex;
+    justify-content: center;
+    height: 66px;
+    width: 180px;
+    background: #ffecf3;
+    align-items: center;
+    border: 1px solid black;
+    margin: 0 auto;
+    border-radius: 6px;
+}
+
 .circular-button {
-    background-color: #8ED6EA;
-    color: rebeccapurple;
-    border-radius: 50%;
+    background: linear-gradient(to bottom right, #ffffcc 0%, #ffe7ee 130%);
     display: inline-block;
     text-align: center;
-    font-size: 16px;
-    padding: 15px;
-    border: none;
+    border-radius: 50%;
+    border: 2px solid black;
+    color: black;
+    opacity: 0.8;
+    transition: 0.3s;
+    outline: none;
+}
+
+.circular-button:hover {
+    cursor: pointer;
+    background: linear-gradient(to bottom right, #ffffcc 0%, #ffcccc 130%);
+    opacity: 2;
+}
+
+.play-button-spacing {
+    padding:0 20px;
+}
+
+.play-button {
+    height: 50px;
+    width: 50px;
+    padding-top: 4px;
+}
+
+.play-button > .inner-icon {
+    font-size: 35px;
+}
+
+.fast-forward-button {
+    height: 30px;
+    width: 30px;
+    padding-top: 4px;
+}
+
+.fast-forward-button > .inner-icon {
+    font-size: 17px;
+}
+
+.mirror-content {
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
 }
