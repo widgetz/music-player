@@ -6,7 +6,7 @@ import MusicWidget from "./components/MusicWidget";
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
+      <div className="App" style={{marginTop: "250px"}}>
         <MusicWidget />
       </div>
     );
