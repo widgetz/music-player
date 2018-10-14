@@ -7,29 +7,20 @@ import TrackItem from "./TrackItem";
 class MusicWidget extends React.Component {
   constructor(props) {
     super(props);
-    this.tracks = [];
-    this.audioRef = React.createRef(); // need ref to change audio source
-    this.toggleAudio = this.toggleAudio.bind(this);
-    this.playNow = this.playNow.bind(this);
-    this.createPlayButton = this.createPlayButton.bind(this);
-    this.ended = this.ended.bind(this);
-    this.renderPlaylist = this.renderPlaylist.bind(this);
-    this.createTracks(props.sourceMap);
+    this.init();
     this.state = {
       isPlaying: false
     };
   }
 
-  createTracks(sources = new Map()) {
-    sources.forEach((src, name) => {
-      this.tracks.push(new AudioTrack(name, src))
-    })
-  }
-
-  renderPlaylist() {
-   return  this.tracks.map((audioTrack, index) =>
-        <TrackItem key={index} onClick={this.playNow} src={audioTrack.src} name={audioTrack.name}/>
-    );
+  init(){
+    this.audioRef = React.createRef(); // need ref to change audio source
+    this.tracks = this.createTracks(this.props.sourceMap);
+    this.toggleAudio = this.toggleAudio.bind(this);
+    this.playNow = this.playNow.bind(this);
+    this.createPlayButton = this.createPlayButton.bind(this);
+    this.ended = this.ended.bind(this);
+    this.renderPlaylist = this.renderPlaylist.bind(this);
   }
 
   createPlayButton() {
@@ -37,6 +28,20 @@ class MusicWidget extends React.Component {
       <button className="circular-button" onClick={this.toggleAudio}>
         {this.state.isPlaying ? <span>&#9612;&#9612;</span> : <span>&#x25b6;</span>}
       </button>
+    );
+  }
+
+  createTracks(sources = new Map()) {
+    const tracks = [];
+    sources.forEach((src, name) => {
+      tracks.push(new AudioTrack(name, src))
+    });
+    return tracks;
+  }
+
+  renderPlaylist() {
+   return  this.tracks.map((audioTrack, index) =>
+        <TrackItem key={index} onClick={this.playNow} src={audioTrack.src} name={audioTrack.name}/>
     );
   }
 
@@ -58,6 +63,13 @@ class MusicWidget extends React.Component {
       this.setState({isPlaying: false});
       return;
     }
+    // TODO: this would be registered to event when no audio src exist
+    if (!audioPlayer.src && this.tracks.length > 0) {
+      const audioTrack = this.tracks[0];
+      audioPlayer.src = audioTrack.src;
+    } else if (this.tracks.length <= 0) {
+      return;
+    }
     audioPlayer.play();
     this.setState({isPlaying: true});
   }
@@ -75,7 +87,7 @@ class MusicWidget extends React.Component {
   render() {
     return (
         <div>
-          <audio ref={this.audioRef} src={this.props.sourceMap.get('arrow')} onEnded={this.ended}/>
+          <audio ref={this.audioRef} onEnded={this.ended}/>
           {this.createPlayButton()}
           {this.renderPlaylist()}
           <div className="music-widget-container">

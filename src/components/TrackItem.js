@@ -10,7 +10,6 @@ export default class TrackItem extends Component {
     event.preventDefault();
     this.props.onClick(new AudioTrack(event.target.innerHTML, event.target.href));
   }
-
   render() {
     return <a href={this.props.src} onClick={this.handleClick}>{this.props.name} </a>
   }
