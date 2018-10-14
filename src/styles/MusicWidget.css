@@ -1,0 +1,10 @@
+.circular-button {
+    background-color: #8ED6EA;
+    color: rebeccapurple;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    padding: 15px;
+    border: none;
+}
