@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import Audio from "./Audio";
 import "../styles/MusicWidget.css"
 
 class MusicWidget extends React.Component {
@@ -12,6 +12,7 @@ class MusicWidget extends React.Component {
   render() {
     return (
         <div>
+          <Audio/>
           <button className="circular-button">50%</button>
         </div>
     )
