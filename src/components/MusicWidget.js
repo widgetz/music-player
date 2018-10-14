@@ -1,7 +1,6 @@
 import React from 'react';
 import {MdPlayArrow, MdFastForward} from 'react-icons/md'
 
-import Audio from "./Audio";
 import "../styles/MusicWidget.css"
 
 class MusicWidget extends React.Component {
@@ -31,10 +30,6 @@ class MusicWidget extends React.Component {
                 <MdFastForward className="inner-icon"/>
               </button>
             </div>
-
-          <div>
-            <Audio/>
-          </div>
         </div>
     )
   }
