@@ -41,7 +41,7 @@ class MusicWidget extends React.Component {
 
   renderPlaylist() {
    return  this.tracks.map((audioTrack, index) =>
-        <TrackItem key={index} onClick={this.playNow} src={audioTrack.src} name={audioTrack.name}/>
+        <TrackItem key={index} onClick={this.playNow} audioTrack={audioTrack}/>
     );
   }
 
@@ -63,7 +63,7 @@ class MusicWidget extends React.Component {
       this.setState({isPlaying: false});
       return;
     }
-    // TODO: this would be registered to event when no audio src exist
+    // TODO: this would be registered to an event when no audio src exist
     if (!audioPlayer.src && this.tracks.length > 0) {
       const audioTrack = this.tracks[0];
       audioPlayer.src = audioTrack.src;

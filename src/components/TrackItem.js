@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import AudioTrack from "../model/AudioTrack"
 
 export default class TrackItem extends Component {
   constructor(props){
@@ -9,10 +8,10 @@ export default class TrackItem extends Component {
 
   handleClick(event) {
     event.preventDefault();
-    this.props.onClick(new AudioTrack(event.target.innerHTML, event.target.href));
+    this.props.onClick(this.props.audioTrack);
   }
 
   render() {
-    return <a href={this.props.src} onClick={this.handleClick}>{this.props.name} </a>
+    return <a href={this.props.audioTrack.src} onClick={this.handleClick}>{this.props.audioTrack.name} </a>
   }
 }
