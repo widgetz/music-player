@@ -12,14 +12,14 @@ class MusicWidget extends React.Component {
     this.state = {
       isPlaying: false,
       sliderPos: 0,
-      autoPlay: false,
+      loop: false,
     };
   }
 
   init(){
     this.audioRef = React.createRef(); // need ref to change audio source
     this.playList = this.createPlayList(this.props.sourceMap);
-    this.toggleAutoPlay = this.toggleAutoPlay.bind(this);
+    this.toggleLoop = this.toggleLoop.bind(this);
     this.toggleAudio = this.toggleAudio.bind(this);
     this.playNow = this.playNow.bind(this);
     this.playing = this.playing.bind(this);
@@ -51,18 +51,19 @@ class MusicWidget extends React.Component {
       this.setState({isPlaying: false});
       return;
     }
-    if (!audioPlayer.src) {
-      audioPlayer.src = this.playList.playNext().src;
+    const track = this.playList.playNext();
+    if (!audioPlayer.src && track) {
+      audioPlayer.src = track.src;
+      audioPlayer.play();
+      this.setState({isPlaying: true});
     }
-    audioPlayer.play();
-    this.setState({isPlaying: true});
   }
 
-  toggleAutoPlay() {
-    if (!this.state.autoPlay) {
+  toggleLoop() {
+    if (!this.state.loop) {
       this.playNext()
     }
-    this.setState({autoPlay: !this.state.autoPlay})
+    this.setState({loop: !this.state.loop})
   }
 
   playNext() {
@@ -79,6 +80,7 @@ class MusicWidget extends React.Component {
     this.setState({isPlaying: true})
   }
 
+  // todo: slider for seeking
   seeking(event) {
     this.audioRef.current.currentTime = event.target.value;
   }
@@ -88,7 +90,7 @@ class MusicWidget extends React.Component {
   }
 
   ended() {
-    if (this.state.autoPlay) {
+    if (this.state.loop) {
       this.playNext();
     } else {
       this.setState({isPlaying: false})
@@ -128,7 +130,7 @@ class MusicWidget extends React.Component {
               </button>
             </div>
             <div>
-              <button className="circular-button media-button" onClick={this.toggleAutoPlay}>
+              <button className="circular-button media-button" onClick={this.toggleLoop}>
                 <MdAutorenew className="inner-icon"/>
               </button>
             </div>
