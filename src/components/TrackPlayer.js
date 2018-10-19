@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-export default class TrackItem extends Component {
+export default class TrackPlayer extends Component {
   constructor(props){
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -12,6 +12,6 @@ export default class TrackItem extends Component {
   }
 
   render() {
-    return <a href={this.props.audioTrack.src} onClick={this.handleClick}>{this.props.audioTrack.name} </a>
+    return <a className={this.props.className} href={this.props.audioTrack.src} onClick={this.handleClick}>{this.props.audioTrack.name} </a>
   }
 }
