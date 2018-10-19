@@ -13,7 +13,6 @@ class MusicWidget extends React.Component {
       isPlaying: false,
       sliderPos: 0,
       autoPlay: false,
-      selected: this.playList.current
     };
   }
 
@@ -52,10 +51,8 @@ class MusicWidget extends React.Component {
       this.setState({isPlaying: false});
       return;
     }
-    if (!audioPlayer.src && this.playList.size() > 0) {
-      audioPlayer.src = this.playList.play().src;
-    } else if (this.playList.size().length <= 0) {
-      return;
+    if (!audioPlayer.src) {
+      audioPlayer.src = this.playList.playNext().src;
     }
     audioPlayer.play();
     this.setState({isPlaying: true});
@@ -72,14 +69,14 @@ class MusicWidget extends React.Component {
     const audioPlay = this.audioRef.current;
     audioPlay.src = this.playList.playNext().src;
     audioPlay.play();
-    this.setState({isPlaying: true, selected: this.playList.current});
+    this.setState({isPlaying: true});
   }
 
   playPrev() {
     const audioPlay = this.audioRef.current;
     audioPlay.src = this.playList.playPrevious().src;
     audioPlay.play();
-    this.setState({isPlaying: true, selected: this.playList.current})
+    this.setState({isPlaying: true})
   }
 
   seeking(event) {
@@ -98,12 +95,13 @@ class MusicWidget extends React.Component {
     }
   }
 
-  isPlaying(currentSong) {
-    return this.state.selected === currentSong;
+  //todo: compare song names?
+  isPlaying(currentSongIndex) {
+    return this.playList.getCurrent() === currentSongIndex;
   }
 
   //TODO: Make the media controls a component
-  //      Make a playlist component or make the PlayList service a component
+  //TODO: Make a playlist component or make the PlayList service into a component
   render() {
     return (
         <div>
@@ -138,8 +136,9 @@ class MusicWidget extends React.Component {
           <div className="playlist">
             <ul>
               {
+                // todo: if the data structure is not an array this breaks
                 this.playList.getPlaylist().map((audioTrack, trackNum) =>
-                  <li key={trackNum} className={this.isPlaying(trackNum) && this.state.isPlaying ? "track__current spring" : ""}>
+                  <li key={trackNum} className={this.isPlaying(trackNum) && this.state.isPlaying ? "track__current" : ""}>
                     <TrackPlayer onClick={() => this.playNow(trackNum)} audioTrack={audioTrack}/>
                   </li>)
               }

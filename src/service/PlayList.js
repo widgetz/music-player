@@ -1,6 +1,6 @@
 export default class PlayList {
   constructor(trackList) {
-    this.trackList = trackList;
+    this.trackList = trackList; // todo: consider using a map or give audio tracks an ID for play(num)
     this.current = undefined;
 
   }
@@ -22,6 +22,10 @@ export default class PlayList {
     return this.trackList[this.current];
   }
 
+  getCurrent(){
+    return this.current;
+  }
+
   playPrevious() {
     if (!this.hasSong()) {
       this.current = this.trackList.length - 1;
@@ -31,6 +35,7 @@ export default class PlayList {
     return this.trackList[this.current];
   }
 
+  // todo: should return iterator
   getPlaylist() {
     return this.trackList;
   }
