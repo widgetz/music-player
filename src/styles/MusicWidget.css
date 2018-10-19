@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     height: 66px;
-    width: 180px;
+    width: 200px;
     background: #ffecf3;
     align-items: center;
     border: 1px solid black;
@@ -52,10 +52,21 @@
     font-size: 17px;
 }
 
+.media-button {
+    height: 30px;
+    width: 30px;
+    padding-top: 4px;
+    margin: 4px
+}
+
 .mirror-content {
     -moz-transform: scale(-1, 1);
     -webkit-transform: scale(-1, 1);
     -o-transform: scale(-1, 1);
     -ms-transform: scale(-1, 1);
     transform: scale(-1, 1);
+}
+
+.track__current {
+    background: lightblue;
 }
