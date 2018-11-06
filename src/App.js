@@ -1,4 +1,4 @@
-import React from "react";
+    import React from "react";
 import './App.css';
 import MusicWidget from "./components/MusicWidget";
 import arrow from "./audio/arrow_x.wav";

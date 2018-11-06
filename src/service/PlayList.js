@@ -1,5 +1,6 @@
 export default class PlayList {
   constructor(trackList) {
+    console.log(trackList)
     this.trackList = trackList; // todo: consider using a map or give audio tracks an ID for play(num)
     this.current = undefined;
 
